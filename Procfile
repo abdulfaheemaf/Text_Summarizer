@@ -1,0 +1,1 @@
+web: gunicorn Text_Summarizer.wsgi --log-file -
