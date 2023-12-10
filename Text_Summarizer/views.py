@@ -32,17 +32,20 @@ def index(request):
             nltk.download('punkt')
             original_sentences = nltk.sent_tokenize(text)
 
-            if len(original_sentences) < 10:
-                max_len = len(original_sentences)
-                min_len = 1
-                interval = max_len // 4
-                intervals = list(range(min_len, max_len, interval))
-                if no_of_sentences == 4:
-                    no_of_sentences = intervals[1]
-                elif no_of_sentences == 7:
-                    no_of_sentences = intervals[2]
-                elif no_of_sentences == 10:
-                    no_of_sentences = intervals[-1]
+            if no_of_sentences == 1:
+                no_of_sentences = round(0.2 * len(original_sentences))
+
+            elif no_of_sentences == 4:
+                no_of_sentences = round(0.3 * len(original_sentences))
+
+            elif no_of_sentences == 7:
+                no_of_sentences = round(0.4 * len(original_sentences))
+
+            elif no_of_sentences == 10:
+                no_of_sentences = round(0.5 * len(original_sentences))
+
+            if len(original_sentences) == 1 or no_of_sentences <= 0:
+                return f"Unable to Summarize...!"
 
             # preprocess
 
